@@ -1,10 +1,12 @@
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.*;
 
 public class gissatalet {
 
     public static void main(String[] args) {
 
-        int antalfel = 0;
+        int tries = 1;
         int spelarsvar;
         int min = 1;
         int max = 100;
@@ -18,20 +20,28 @@ public class gissatalet {
         while (!aaa) {
 
             if(spelarsvar == randomnummer) {
-                JOptionPane.showMessageDialog(null, "yikes du vann, du tog " + antalfel);
+                if(tries > 5)
+                    JOptionPane.showMessageDialog(null, "yikes du vann tillslut, det tog " + tries + " försök.");
+                if(tries == 1)
+                    JOptionPane.showMessageDialog(null, "Gudn 0 deaths");
+                if(tries != 1) {
+                    if(tries < 5)
+                        JOptionPane.showMessageDialog(null, "grattis du är inte helt sämst, det tog " + tries + " försök.");
+                }
                 aaa = true;
                 continue;
+
             }
 
-                if (spelarsvar > randomnummer) {
-                    spelarsvar = Integer.parseInt(JOptionPane.showInputDialog("det är mindre än " + spelarsvar + " ge ett nytt nummer"));
-                    antalfel = antalfel + 1;
-                }
+            if (spelarsvar > randomnummer) {
+                spelarsvar = Integer.parseInt(JOptionPane.showInputDialog("det är mindre än " + spelarsvar + ", ge ett nytt nummer"));
+                tries = tries + 1;
+            }
 
-                if (spelarsvar < randomnummer) {
-                    spelarsvar = Integer.parseInt(JOptionPane.showInputDialog("det är mer än " + spelarsvar + " ge ett nytt nummer"));
-                    antalfel = antalfel + 1;
-                }
+            if (spelarsvar < randomnummer) {
+                spelarsvar = Integer.parseInt(JOptionPane.showInputDialog("det är mer än " + spelarsvar + ", ge ett nytt nummer"));
+                tries = tries + 1;
+            }
         }
     }
 }
